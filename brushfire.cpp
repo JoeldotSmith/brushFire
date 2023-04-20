@@ -58,3 +58,8 @@ struct Walls
         all.push_back(right);
     }
 } Walls;
+
+// World Name
+char *FileName = "u.pbm";
+
+// Globals
