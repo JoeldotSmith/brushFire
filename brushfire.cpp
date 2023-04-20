@@ -61,10 +61,10 @@ typedef struct Walls
 } Walls;
 
 // World Name
-char *FileName = "u.pbm";
+char *fileName = "u.pbm";
 
 // Globals
-bool image = false;
+BYTE *image;
 vector<Pixel> allPixels;
 vector<Object> allObject;
 int numberOfObjects = 0;
@@ -95,4 +95,5 @@ void LCDPixelBigger(int x, int y, COLOR colour)
 
 void readImage()
 {
+    read_pbm(fileName, &image);
 }
