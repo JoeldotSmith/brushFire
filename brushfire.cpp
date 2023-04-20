@@ -138,7 +138,7 @@ void brushFire()
             {
                 if (j > allPixels.size() - IMAGESIZE * floor(allPixels.size() / IMAGESIZE))
                 {
-                    return
+                    return;
                 }
                 // if wall or already has a number continue
 
@@ -155,8 +155,29 @@ void brushFire()
                     allPixels[i * IMAGESIZE + j].expansion = -1; // TODO ID you found
                     changes = true;
                     LCDPixelBigger(pixel.x, pixel.y, LIGHTGRAY);
+
+                    // if two neighbours labeled or neighbour with same expansion
+                    //  voroni point so label it
                 }
             }
         }
     }
+}
+int heuristic(Pixel pixel)
+{
+    return 0; // TODO A* heuristic (euclidean distance)
+}
+
+int main()
+{
+    readImage();
+    // Display image and objects with unique colours
+    // display voroni points and lines
+
+    // required path = path
+
+    // drive to goal, following the path
+
+    LCDMenu("EXIT", "", "", "");
+    KEYWait(KEY1);
 }
