@@ -3,8 +3,9 @@
 #include <vector>
 using std::vector;
 
-typedef struct Pixel{
-    int x; 
+typedef struct Pixel
+{
+    int x;
     int y;
     int id;
     int expansion = 0;
@@ -13,33 +14,39 @@ typedef struct Pixel{
     vector<int> allObjectId;
 } Pixel;
 
-struct Object{
+struct Object
+{
     int id;
     vector<Pixel> allPixels;
 
-    void addPixeltoLine(Pixel pixel){
+    void addPixeltoLine(Pixel pixel)
+    {
         allPixels.push_back(pixel);
     }
 
-    
 } Object;
 
-struct Walls{
+struct Walls
+{
     vector<Pixel> top;
     vector<Pixel> bottom;
     vector<Pixel> left;
     vector<Pixel> right;
 
-    void addPixeltoTop(Pixel pixel){
+    void addPixeltoTop(Pixel pixel)
+    {
         top.push_back(pixel);
     }
-    void addPixeltoBottom(Pixel pixel){
+    void addPixeltoBottom(Pixel pixel)
+    {
         bottom.push_back(pixel);
     }
-    void addPixeltoLeft(Pixel pixel){
+    void addPixeltoLeft(Pixel pixel)
+    {
         left.push_back(pixel);
     }
-    void addPixeltoTop(Pixel pixel){
+    void addPixeltoTop(Pixel pixel)
+    {
         right.push_back(pixel);
     }
 } Walls;
