@@ -1,4 +1,12 @@
-//
+/*
+
+
+BRUSHFIRE for eyeSim
+
+Author Joel Smith
+
+
+*/
 #include "eyebot++.h"
 #include "image.h"
 #include <vector>
