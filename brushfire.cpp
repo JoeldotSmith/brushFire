@@ -1,5 +1,6 @@
 //
 #include "eyebot++.h"
+#include "image.h"
 #include <vector>
 using std::vector;
 
@@ -65,4 +66,33 @@ char *FileName = "u.pbm";
 // Globals
 bool image = false;
 vector<Pixel> allPixels;
-Object Object;
+vector<Object> allObject;
+int numberOfObjects = 0;
+
+#define WORLDSIZE 4000;
+#define IMAGESIZE 128;
+
+vector<int> getReletiveGoalLocation(int x, int y)
+{
+    int dist = 0; // TODO
+    int rot = 0;  // TODO
+    vector<int> callBack;
+    callBack.push_back(dist);
+    callBack.push_back(rot);
+    return callBack;
+}
+
+void driveToPoint(int x, int y)
+{
+    // TODO
+    return;
+}
+
+void LCDPixelBigger(int x, int y, COLOR colour)
+{
+    LCDArea(x ^ 2, y ^ 2, x ^ 2 + 2, y ^ 2 + 2, colour, 1);
+}
+
+void readImage()
+{
+}
