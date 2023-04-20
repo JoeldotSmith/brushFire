@@ -69,8 +69,8 @@ vector<Pixel> allPixels;
 vector<Object> allObject;
 int numberOfObjects = 0;
 
-#define WORLDSIZE 4000;
-#define IMAGESIZE 128;
+int WORLDSIZE = 4000;
+int IMAGESIZE = 128;
 
 vector<int> getReletiveGoalLocation(int x, int y)
 {
@@ -95,5 +95,68 @@ void LCDPixelBigger(int x, int y, COLOR colour)
 
 void readImage()
 {
-    read_pbm(fileName, &image);
+    read_pbm(fileName, &image); // same as last week but you might want to add walls aswell
+}
+
+void getObjectAndRemove(int id)
+{ // TODO
+    // TODO pops an object from the list
+    return;
+}
+
+void resolveObject()
+{ // TODO
+    // TODO may not be necessary, joins adjacent objects such as u object
+    return;
+}
+
+void groupPixel()
+{                    // TODO
+                     /*
+                     for each pixel
+                         if you are occupied
+                             check if neighbours are occupied to assign to that object
+                             if neighbours are not occupied found new object
+                     */
+    resolveObject(); // if necessary
+
+    // add walls to object list if necessary
+}
+
+void brushFire()
+{
+    bool changes = true;
+    while (changes)
+    {
+        changes = false;
+        // for each row in allPixels
+        for (int i = 0; i < (allPixels.size() / IMAGESIZE); i++)
+
+        {
+            // for each pixel in row
+            for (int j = 0; j < 128; i++)
+            {
+                if (j > allPixels.size() - IMAGESIZE * floor(allPixels.size() / IMAGESIZE))
+                {
+                    return
+                }
+                // if wall or already has a number continue
+
+                // for all other neighbours
+
+                vector<int> allIds;
+                Pixel pixel = allPixels[i * IMAGESIZE + j];
+
+                // if neightbour has expansion value
+                allIds.push_back(pixel.id);
+
+                if (allIds.size() > 0)
+                {
+                    allPixels[i * IMAGESIZE + j].expansion = -1; // TODO ID you found
+                    changes = true;
+                    LCDPixelBigger(pixel.x, pixel.y, LIGHTGRAY);
+                }
+            }
+        }
+    }
 }
