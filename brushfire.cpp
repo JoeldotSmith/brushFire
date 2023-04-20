@@ -49,4 +49,12 @@ struct Walls
     {
         right.push_back(pixel);
     }
+    vector<vector<int>> getAll()
+    {
+        vector<vector<int>> all;
+        all.push_back(top);
+        all.push_back(bottom);
+        all.push_back(left);
+        all.push_back(right);
+    }
 } Walls;
