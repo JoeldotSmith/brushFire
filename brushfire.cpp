@@ -14,7 +14,7 @@ typedef struct Pixel
     vector<int> allObjectId;
 } Pixel;
 
-struct Object
+typedef struct Object
 {
     int id;
     vector<Pixel> allPixels;
@@ -26,7 +26,7 @@ struct Object
 
 } Object;
 
-struct Walls
+typedef struct Walls
 {
     vector<Pixel> top;
     vector<Pixel> bottom;
@@ -63,3 +63,6 @@ struct Walls
 char *FileName = "u.pbm";
 
 // Globals
+bool image = false;
+vector<Pixel> allPixels;
+Object Object;
