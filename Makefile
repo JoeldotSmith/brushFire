@@ -1,5 +1,5 @@
 # Makefile Compile all .c into .x
-ALL:  $(patsubst %.c,%.x, $(wildcard *.c))
+ALL:  $(patsubst %.cpp,%.x, $(wildcard *.cpp))
 	
 %.x: %.cpp
 	g++sim -o $*.x $*.cpp
