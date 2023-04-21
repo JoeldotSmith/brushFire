@@ -14,11 +14,11 @@ using std::vector;
 
 typedef struct Pixel
 {
-    int x;
-    int y;
-    int id;
+    int x = -1;
+    int y = -1;
+    int id = -1;
     int expansion = 0;
-    int value;
+    int value = -1;
     bool voroni = false;
     vector<int> allObjectId;
 } Pixel;
@@ -54,7 +54,7 @@ typedef struct Walls
     {
         left.push_back(pixel);
     }
-    void addPixeltoTop(Pixel pixel)
+    void addPixeltoRight(Pixel pixel)
     {
         right.push_back(pixel);
     }
@@ -69,7 +69,7 @@ typedef struct Walls
 } Walls;
 
 // World Name
-char *fileName = "u.pbm";
+const char *fileName = "u.pbm";
 
 // Globals
 BYTE *image;
