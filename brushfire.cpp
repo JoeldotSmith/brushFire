@@ -80,10 +80,12 @@ int numberOfObjects = 0;
 int WORLDSIZE = 4000;
 int IMAGESIZE = 128;
 
-vector<int> getReletiveGoalLocation(int x, int y)
+vector<int> getReletiveGoalLocation(int x, int y, int curX, int curY)
 {
-    int dist = 0; // TODO
-    int rot = 0;  // TODO
+    int dx = x - curX;
+    int dy = y - curY;
+    int dist = sqrt(dx * dx + dy * dy);
+    int rot = atan2(dy, dx) * 180 / M_PI;
     vector<int> callBack;
     callBack.push_back(dist);
     callBack.push_back(rot);
@@ -107,28 +109,64 @@ void readImage()
 }
 
 void getObjectAndRemove(int id)
-{ // TODO
-    // TODO pops an object from the list
+{
+    for (int i = 0; i < allObject.size(); i++)
+    {
+        if (allObject.at(i).id == id)
+        {
+            allObject.erase(allObject.begin() + i);
+        }
+    }
     return;
 }
 
 void resolveObject()
-{ // TODO
+{
     // TODO may not be necessary, joins adjacent objects such as u object
     return;
 }
 
 void groupPixel()
-{                    // TODO
-                     /*
-                     for each pixel
-                         if you are occupied
-                             check if neighbours are occupied to assign to that object
-                             if neighbours are not occupied found new object
-                     */
-    resolveObject(); // if necessary
+{ // TODO
+    /*
+    for each pixel
+        if you are occupied
+            check if neighbours are occupied to assign to that object
+            if neighbours are not occupied found new object
+    */
+    // resolveObject(); // if necessary
 
     // add walls to object list if necessary
+
+    for (int i = 0; i < 128; i++)
+    {
+        for (int j = 0; j < 128; i++)
+        {
+            if (image[i * IMAGESIZE + j])
+            {
+                if (allPixels.at(i * IMAGESIZE + j - 1).id != NULL)
+                {
+                    allPixels.at(i * IMAGESIZE + j).id = allPixels.at(i * IMAGESIZE + j - 1).id;
+                    allObject.at(allPixels.at(i * IMAGESIZE + j).id).allPixels.push_back(allPixels.at(i * IMAGESIZE + j));
+                }
+                else if (allPixels.at((i - 1) * IMAGESIZE + j).id != NULL)
+                {
+                    allPixels.at(i * IMAGESIZE + j).id = allPixels.at((i - 1) * IMAGESIZE + j).id;
+                    allObject.at(allPixels.at(i * IMAGESIZE + j).id).allPixels.push_back(allPixels.at(i * IMAGESIZE + j));
+                }
+                else
+                {
+                    Object newObject;
+                    newObject.id = numberOfObjects;
+                    numberOfObjects += 1;
+                    newObject.allPixels.push_back(allPixels.at(i * IMAGESIZE + j));
+                    allObject.push_back(newObject);
+                }
+            }
+        }
+    }
+    resolveObject();
+    // add walls TODO
 }
 
 void brushFire()
