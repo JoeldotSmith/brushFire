@@ -248,6 +248,19 @@ int main()
 
     // drive to goal, following the path
 
-    LCDMenu("EXIT", "", "", "");
-    KEYWait(KEY1);
-}
+    LCDMenu("PLAY", "", "", "EXIT");
+    int endSim = 0; // boolean to end sim 0 = false, 1 = true
+
+    do
+    {
+        switch (KEYRead())
+        {
+        case KEY1:
+            groupPixel();
+            brushFire();
+            break;
+        case KEY4:
+            break;
+        }
+    } while (!endSim);
+ 
