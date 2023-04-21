@@ -59,9 +59,9 @@ typedef struct Walls
     {
         right.push_back(pixel);
     }
-    vector<vector<Pixel>> getAll()
+    vector<vector<Pixel> > getAll()
     {
-        vector<vector<Pixel>> all;
+        vector<vector<Pixel> > all;
         all.push_back(top);
         all.push_back(bottom);
         all.push_back(left);
