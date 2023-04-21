@@ -198,12 +198,30 @@ void brushFire()
 
                 if (allIds.size() > 0)
                 {
-                    allPixels[i * IMAGESIZE + j].expansion = -1; // TODO ID you found
+                    allPixels[i * IMAGESIZE + j].expansion = allIds.at(allIds.size()); // TODO ID you found
                     changes = true;
                     LCDPixelBigger(pixel.x, pixel.y, LIGHTGRAY);
 
                     // if two neighbours labeled or neighbour with same expansion
                     //  voroni point so label it
+                    if (allIds.size() == 1)
+                    {
+                        if (allPixels[i * IMAGESIZE + j + 1].expansion == allPixels[i * IMAGESIZE + j].expansion)
+                        {
+                            pixel.voroni = true;
+                        }
+                    }
+                    else
+                    {
+                        if (allPixels[i * IMAGESIZE + j + 1].expansion == allPixels[i * IMAGESIZE + j].expansion || allPixels[i * IMAGESIZE + j - 1].expansion == allPixels[i * IMAGESIZE + j].expansion)
+                        {
+                            pixel.voroni = true;
+                        }
+                        if (allPixels.at(i * IMAGESIZE + j + 1).value != NULL && allPixels.at(i * IMAGESIZE + j - 1).value != NULL)
+                        {
+                            pixel.voroni = true;
+                        }
+                    }
                 }
             }
         }
