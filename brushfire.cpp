@@ -18,9 +18,9 @@ typedef struct Pixel
     int x;
     int y;
     int id ;
-    int expansion = 0;
+    int expansion;
     int value;
-    bool voroni = false;
+    bool voroni;
     vector<int> allObjectId;
 
     Pixel() : x(-1), y(-1), id(-1), expansion(0), value(-1), voroni(false) {};
@@ -239,6 +239,8 @@ int heuristic(Pixel pixel)
 int main()
 {
     readImage();
+    LCDImageStart(0, 0, IMAGESIZE, IMAGESIZE);
+    LCDImageBinary(image);
     // Display image and objects with unique colours
     // display voroni points and lines
 
