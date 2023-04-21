@@ -7,6 +7,7 @@ Author Joel Smith
 
 
 */
+
 #include "eyebot++.h"
 #include "image.h"
 #include <vector>
@@ -140,16 +141,16 @@ void groupPixel()
 
     for (int i = 0; i < 128; i++)
     {
-        for (int j = 0; j < 128; i++)
+        for (int j = 0; j < 128; j++)
         {
             if (image[i * IMAGESIZE + j])
             {
-                if (allPixels.at(i * IMAGESIZE + j - 1).id != NULL)
+                if (allPixels.at(i * IMAGESIZE + j - 1).id != -1)
                 {
                     allPixels.at(i * IMAGESIZE + j).id = allPixels.at(i * IMAGESIZE + j - 1).id;
                     allObject.at(allPixels.at(i * IMAGESIZE + j).id).allPixels.push_back(allPixels.at(i * IMAGESIZE + j));
                 }
-                else if (allPixels.at((i - 1) * IMAGESIZE + j).id != NULL)
+                else if (allPixels.at((i - 1) * IMAGESIZE + j).id != -1)
                 {
                     allPixels.at(i * IMAGESIZE + j).id = allPixels.at((i - 1) * IMAGESIZE + j).id;
                     allObject.at(allPixels.at(i * IMAGESIZE + j).id).allPixels.push_back(allPixels.at(i * IMAGESIZE + j));
@@ -217,7 +218,7 @@ void brushFire()
                         {
                             pixel.voroni = true;
                         }
-                        if (allPixels.at(i * IMAGESIZE + j + 1).value != NULL && allPixels.at(i * IMAGESIZE + j - 1).value != NULL)
+                        if (allPixels.at(i * IMAGESIZE + j + 1).value != -1 && allPixels.at(i * IMAGESIZE + j - 1).value != -1)
                         {
                             pixel.voroni = true;
                         }
