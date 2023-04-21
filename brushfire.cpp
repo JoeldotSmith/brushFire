@@ -15,13 +15,15 @@ using std::vector;
 
 typedef struct Pixel
 {
-    int x = -1;
-    int y = -1;
-    int id = -1;
+    int x;
+    int y;
+    int id ;
     int expansion = 0;
-    int value = -1;
+    int value;
     bool voroni = false;
     vector<int> allObjectId;
+
+    Pixel() : x(-1), y(-1), id(-1), expansion(0), value(-1), voroni(false) {};
 } Pixel;
 
 typedef struct Object
@@ -66,6 +68,7 @@ typedef struct Walls
         all.push_back(bottom);
         all.push_back(left);
         all.push_back(right);
+        return all;
     }
 } Walls;
 
