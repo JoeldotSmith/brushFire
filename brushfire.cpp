@@ -253,61 +253,7 @@ void groupPixel()
 
 void brushFire()
 {
-    // bool changes = true;
-    // while (changes)
-    // {
-    //     changes = false;
-    //     // for each row in allPixels
-    //     for (int i = 0; i < (allPixels.size() / IMAGESIZE); i++)
-
-    //     {
-    //         // for each pixel in row
-    //         for (int j = 0; j < 128; i++)
-    //         {
-    //             if (j > allPixels.size() - IMAGESIZE * floor(allPixels.size() / IMAGESIZE))
-    //             {
-    //                 return;
-    //             }
-    //             // if wall or already has a number continue
-
-    //             // for all other neighbours
-
-    //             vector<int> allIds;
-    //             Pixel pixel = allPixels[i * IMAGESIZE + j];
-
-    //             // if neightbour has expansion value
-    //             allIds.push_back(pixel.id);
-
-    //             if (allIds.size() > 0)
-    //             {
-    //                 allPixels[i * IMAGESIZE + j].expansion = allIds.at(allIds.size()); // TODO ID you found
-    //                 changes = true;
-    //                 LCDPixelBigger(pixel.x, pixel.y, LIGHTGRAY);
-
-    //                 // if two neighbours labeled or neighbour with same expansion
-    //                 //  voroni point so label it
-    //                 if (allIds.size() == 1)
-    //                 {
-    //                     if (allPixels[i * IMAGESIZE + j + 1].expansion == allPixels[i * IMAGESIZE + j].expansion)
-    //                     {
-    //                         pixel.voroni = true;
-    //                     }
-    //                 }
-    //                 else
-    //                 {
-    //                     if (allPixels[i * IMAGESIZE + j + 1].expansion == allPixels[i * IMAGESIZE + j].expansion || allPixels[i * IMAGESIZE + j - 1].expansion == allPixels[i * IMAGESIZE + j].expansion)
-    //                     {
-    //                         pixel.voroni = true;
-    //                     }
-    //                     if (allPixels.at(i * IMAGESIZE + j + 1).value != -1 && allPixels.at(i * IMAGESIZE + j - 1).value != -1)
-    //                     {
-    //                         pixel.voroni = true;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+    
     bool changes = true;
     while (changes){
         changes = false;
@@ -413,13 +359,18 @@ void brushFire()
             }
 
         }
-    }
-
-    for (int x = 0; x < 128; x++){
-        for (int y = 0; y < 128; y++){
-            int id = 
+        for (int x = 0; x < 128; x++){
+            for (int y = 0; y < 128; y++){
+                int id = allPixels.at(x*128+y).id;
+                if (id != -1){
+                    LCDArea(y, x, y+1, x+1, Colours.at(id), 1);
+                }
+                
+            }
         }
     }
+
+    
 
 
     
@@ -458,8 +409,10 @@ int main()
         {
         case KEY1:
             groupPixel();
+            
+            KEYWait(KEY1);
+            brushFire();
             break;
-            //brushFire();
         case KEY4:
             break;
         }
