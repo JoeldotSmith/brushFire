@@ -74,6 +74,8 @@ typedef struct Walls
 
 // World Name
 const char *fileName = "u.pbm";
+vector<int> Colours;
+
 
 // Globals
 BYTE *image;
@@ -138,39 +140,130 @@ void groupPixel()
             check if neighbours are occupied to assign to that object
             if neighbours are not occupied found new object
     */
-    // resolveObject(); // if necessary
+   
 
-    // add walls to object list if necessary
+    for (int i = 0; i < 128; i++){
+        for (int j = 0; j < 128; j++){
+            Pixel newPixel;
+            newPixel.x = i;
+            newPixel.y = j;
+            if (image[i*128+j]){
+                
 
-    for (int i = 0; i < 128; i++)
-    {
-        for (int j = 0; j < 128; j++)
-        {
-            if (image[i * IMAGESIZE + j])
-            {
-                if (allPixels.at(i * IMAGESIZE + j - 1).id != -1)
-                {
-                    allPixels.at(i * IMAGESIZE + j).id = allPixels.at(i * IMAGESIZE + j - 1).id;
-                    allObject.at(allPixels.at(i * IMAGESIZE + j).id).allPixels.push_back(allPixels.at(i * IMAGESIZE + j));
+                int hasNeighbours = -1; // stores neighbour id if has neighbour
+
+                // neighbours = connected elements with the current element's value
+                if (j > 0){
+                    if (image[i * 128 + j - 1])
+                    { // pixel to the left
+                        hasNeighbours = allPixels.at(i * 128 + j - 1).id;
+                    }
+                    if (image[(i - 1) * 128 + j - 1])
+                    { // pixel to the top and left
+                        hasNeighbours = allPixels.at((i - 1) * 128 + j - 1).id;
+                    }
                 }
-                else if (allPixels.at((i - 1) * IMAGESIZE + j).id != -1)
-                {
-                    allPixels.at(i * IMAGESIZE + j).id = allPixels.at((i - 1) * IMAGESIZE + j).id;
-                    allObject.at(allPixels.at(i * IMAGESIZE + j).id).allPixels.push_back(allPixels.at(i * IMAGESIZE + j));
+                
+                
+                if (image[(i - 1) * 128 + j]){ // pixel above
+                    hasNeighbours = allPixels.at((i - 1) * 128 + j).id;
                 }
-                else
-                {
+                if (j < 128 ){
+                    if (image[(i - 1) * 128 + j + 1])
+                    { // pixel to the top and right
+                        hasNeighbours = allPixels.at((i - 1) * 128 + j + 1).id;
+                    }
+                }
+                
+                
+
+                if (hasNeighbours == -1){
+                    
+
                     Object newObject;
+                    newPixel.id = numberOfObjects;
                     newObject.id = numberOfObjects;
-                    numberOfObjects += 1;
-                    newObject.allPixels.push_back(allPixels.at(i * IMAGESIZE + j));
+                    newObject.allPixels.push_back(newPixel);
                     allObject.push_back(newObject);
+                    numberOfObjects++;
                 }
+                else{
+                    
+                    newPixel.id = hasNeighbours;
+                    allObject.at(newPixel.id).allPixels.push_back(newPixel);
+                }
+
+
+
+
+
+
             }
+            allPixels.push_back(newPixel);
         }
     }
-    resolveObject();
-    // add walls TODO
+    
+
+    for (int i = 0; i < 128; i++){
+        for (int j = 0; j < 128; j++) {
+
+
+            if (image[i * 128+j]){
+                
+                
+
+
+                if (image[i * 128 + j + 1] && (allPixels.at(i * 128 + j).id != allPixels.at(i * 128 + j+1).id))
+                {
+                    
+                    int newId = allPixels.at(i * 128 + j).id;
+                    int oldId = allPixels.at(i * 128 + j + 1).id;
+
+                    
+                    printf("%merging now %i to %i\n", oldId, newId);
+                    
+
+                    for (int k = 0; k < allObject.at(oldId).allPixels.size(); k++){
+
+                        int x = allObject.at(oldId).allPixels.at(k).x;
+                        int y = allObject.at(oldId).allPixels.at(k).y;
+
+                        allObject.at(oldId).allPixels.at(k).id = newId;
+                        allPixels.at(x*128+y).id = newId;
+                        allObject.at(newId).allPixels.push_back(allObject.at(oldId).allPixels.at(k));
+                       
+                    }
+
+                    printf("erasing object %i with size %lu\n", oldId, allObject.at(oldId).allPixels.size());
+                    allObject.erase(allObject.begin() + oldId);
+                }
+
+
+
+            }
+
+
+        }
+    }
+
+    printf("\n\nFound %lu objects now printing \n\n", allObject.size());
+    printf("\n\n");
+    for (int size = 0; size < allObject.size(); size++)
+    {
+        printf("Object %i, size = %lu, id = %i\n", size, allObject.at(size).allPixels.size(), allObject.at(size).id);
+    }
+    printf("\n\n");
+
+    for (int i = 0; i < allObject.size(); i++){ // for each object in allObjects
+        for (int j = 0; j < allObject.at(i).allPixels.size(); j++){ // for each pixel in object
+            
+
+            int x = allObject.at(i).allPixels.at(j).x;
+            int y = allObject.at(i).allPixels.at(j).y;
+            LCDArea(y, x, y+1, x+1, Colours.at(i), 1);
+        
+        }
+    }
 }
 
 void brushFire()
@@ -238,6 +331,12 @@ int heuristic(Pixel pixel)
 
 int main()
 {
+    Colours.push_back(RED);
+    Colours.push_back(GREEN);
+    Colours.push_back(CYAN);
+    Colours.push_back(PURPLE);
+    Colours.push_back(NAVY);
+    Colours.push_back(DARKGRAY);
     readImage();
     LCDImageStart(0, 0, IMAGESIZE, IMAGESIZE);
     LCDImageBinary(image);
@@ -257,8 +356,8 @@ int main()
         {
         case KEY1:
             groupPixel();
-            brushFire();
             break;
+            //brushFire();
         case KEY4:
             break;
         }
