@@ -133,15 +133,7 @@ void resolveObject()
 }
 
 void groupPixel()
-{ // TODO
-    /*
-    for each pixel
-        if you are occupied
-            check if neighbours are occupied to assign to that object
-            if neighbours are not occupied found new object
-    */
-   
-
+{ 
     for (int i = 0; i < 128; i++){
         for (int j = 0; j < 128; j++){
             Pixel newPixel;
@@ -173,9 +165,7 @@ void groupPixel()
                     { // pixel to the top and right
                         hasNeighbours = allPixels.at((i - 1) * 128 + j + 1).id;
                     }
-                }
-                
-                
+                }      
 
                 if (hasNeighbours == -1){
                     
@@ -192,11 +182,6 @@ void groupPixel()
                     newPixel.id = hasNeighbours;
                     allObject.at(newPixel.id).allPixels.push_back(newPixel);
                 }
-
-
-
-
-
 
             }
             allPixels.push_back(newPixel);
@@ -268,61 +253,178 @@ void groupPixel()
 
 void brushFire()
 {
+    // bool changes = true;
+    // while (changes)
+    // {
+    //     changes = false;
+    //     // for each row in allPixels
+    //     for (int i = 0; i < (allPixels.size() / IMAGESIZE); i++)
+
+    //     {
+    //         // for each pixel in row
+    //         for (int j = 0; j < 128; i++)
+    //         {
+    //             if (j > allPixels.size() - IMAGESIZE * floor(allPixels.size() / IMAGESIZE))
+    //             {
+    //                 return;
+    //             }
+    //             // if wall or already has a number continue
+
+    //             // for all other neighbours
+
+    //             vector<int> allIds;
+    //             Pixel pixel = allPixels[i * IMAGESIZE + j];
+
+    //             // if neightbour has expansion value
+    //             allIds.push_back(pixel.id);
+
+    //             if (allIds.size() > 0)
+    //             {
+    //                 allPixels[i * IMAGESIZE + j].expansion = allIds.at(allIds.size()); // TODO ID you found
+    //                 changes = true;
+    //                 LCDPixelBigger(pixel.x, pixel.y, LIGHTGRAY);
+
+    //                 // if two neighbours labeled or neighbour with same expansion
+    //                 //  voroni point so label it
+    //                 if (allIds.size() == 1)
+    //                 {
+    //                     if (allPixels[i * IMAGESIZE + j + 1].expansion == allPixels[i * IMAGESIZE + j].expansion)
+    //                     {
+    //                         pixel.voroni = true;
+    //                     }
+    //                 }
+    //                 else
+    //                 {
+    //                     if (allPixels[i * IMAGESIZE + j + 1].expansion == allPixels[i * IMAGESIZE + j].expansion || allPixels[i * IMAGESIZE + j - 1].expansion == allPixels[i * IMAGESIZE + j].expansion)
+    //                     {
+    //                         pixel.voroni = true;
+    //                     }
+    //                     if (allPixels.at(i * IMAGESIZE + j + 1).value != -1 && allPixels.at(i * IMAGESIZE + j - 1).value != -1)
+    //                     {
+    //                         pixel.voroni = true;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
     bool changes = true;
-    while (changes)
-    {
+    while (changes){
         changes = false;
-        // for each row in allPixels
-        for (int i = 0; i < (allPixels.size() / IMAGESIZE); i++)
+        for (int i = 0; i < 128; i++){
+            for (int j = 0; j < 128; j++){
+                if (allPixels.at(i*128+j).id != -1){
+                    int newId = allPixels.at(i * 128 + j).id != -1;
 
-        {
-            // for each pixel in row
-            for (int j = 0; j < 128; i++)
-            {
-                if (j > allPixels.size() - IMAGESIZE * floor(allPixels.size() / IMAGESIZE))
-                {
-                    return;
-                }
-                // if wall or already has a number continue
 
-                // for all other neighbours
-
-                vector<int> allIds;
-                Pixel pixel = allPixels[i * IMAGESIZE + j];
-
-                // if neightbour has expansion value
-                allIds.push_back(pixel.id);
-
-                if (allIds.size() > 0)
-                {
-                    allPixels[i * IMAGESIZE + j].expansion = allIds.at(allIds.size()); // TODO ID you found
-                    changes = true;
-                    LCDPixelBigger(pixel.x, pixel.y, LIGHTGRAY);
-
-                    // if two neighbours labeled or neighbour with same expansion
-                    //  voroni point so label it
-                    if (allIds.size() == 1)
-                    {
-                        if (allPixels[i * IMAGESIZE + j + 1].expansion == allPixels[i * IMAGESIZE + j].expansion)
-                        {
-                            pixel.voroni = true;
+                    if (j > 0 && i > 0){
+                        if (allPixels.at((i-1) * 128 + j-1).id == -1){
+                            changes = true;
+                            allPixels.at((i - 1) * 128 + j - 1).id = newId;
+                        } else if (allPixels.at(i*128+j).id != allPixels.at((i-1) * 128 + j-1).id){
+                            changes = true;
+                            allPixels.at(i*128+j).voroni = true;
+                            allPixels.at((i-1) * 128 + j-1).voroni = true;
                         }
                     }
-                    else
-                    {
-                        if (allPixels[i * IMAGESIZE + j + 1].expansion == allPixels[i * IMAGESIZE + j].expansion || allPixels[i * IMAGESIZE + j - 1].expansion == allPixels[i * IMAGESIZE + j].expansion)
-                        {
-                            pixel.voroni = true;
-                        }
-                        if (allPixels.at(i * IMAGESIZE + j + 1).value != -1 && allPixels.at(i * IMAGESIZE + j - 1).value != -1)
-                        {
-                            pixel.voroni = true;
+
+                    if (j > 0){
+                        if (allPixels.at((i) * 128 + j-1).id == -1){
+                            changes = true;
+                            allPixels.at((i) * 128 + j - 1).id = newId;
+                        } else if (allPixels.at(i*128+j).id != allPixels.at((i) * 128 + j-1).id){
+                            changes = true;
+                            allPixels.at(i*128+j).voroni = true;
+                            allPixels.at((i) * 128 + j-1).voroni = true;
                         }
                     }
+
+                    if (j > 0 && i < 128){
+                        if (allPixels.at((i+1) * 128 + j-1).id == -1){
+                            changes = true;
+                            allPixels.at((i + 1) * 128 + j - 1).id = newId;
+                        } else if (allPixels.at(i*128+j).id != allPixels.at((i+1) * 128 + j-1).id){
+                            changes = true;
+                            allPixels.at(i*128+j).voroni = true;
+                            allPixels.at((i+1) * 128 + j-1).voroni = true;
+                        }
+                    }
+
+                    if (i > 0){
+                        if (allPixels.at((i-1) * 128 + j).id == -1){
+                            allPixels.at((i-1) * 128 + j).id = newId;
+                            changes = true;
+                        } else if (allPixels.at(i*128+j).id != allPixels.at((i-1) * 128 + j).id){
+                            changes = true;
+                            allPixels.at(i*128+j).voroni = true;
+                            allPixels.at((i-1) * 128 + j).voroni = true;
+                        }
+                    }
+
+                    if (i < 128){
+                        if (allPixels.at((i+1) * 128 + j).id == -1){
+                            changes = true;
+                            allPixels.at((i+1) * 128 + j).id = newId;
+                        } else if (allPixels.at(i*128+j).id != allPixels.at((i+1) * 128 + j).id){
+                            changes = true;
+                            allPixels.at(i*128+j).voroni = true;
+                            allPixels.at((i+1) * 128 + j).voroni = true;
+                        }
+                    }
+
+                    if (j < 128 && i > 0){
+                        if (allPixels.at((i-1) * 128 + j+1).id == -1){
+                            changes = true;
+                            allPixels.at((i - 1) * 128 + j - 1).id = newId;
+                        } else if (allPixels.at(i*128+j).id != allPixels.at((i-1) * 128 + j+1).id){
+                            changes = true;
+                            allPixels.at(i*128+j).voroni = true;
+                            allPixels.at((i-1) * 128 + j+1).voroni = true;
+                        }
+                    }
+
+                    if (j < 128){
+                        if (allPixels.at((i) * 128 + j+1).id == -1){
+                            changes = true;
+                            allPixels.at((i) * 128 + j + 1).id = newId;
+                        } else if (allPixels.at(i*128+j).id != allPixels.at((i) * 128 + j+1).id){
+                            changes = true;
+                            allPixels.at(i*128+j).voroni = true;
+                            allPixels.at((i) * 128 + j+1).voroni = true;
+                        }
+                    }
+
+                    if (j < 128 && i < 128){
+                        if (allPixels.at((i+1) * 128 + j+1).id == -1){
+                            changes = true;
+                            allPixels.at((i + 1) * 128 + j - 1).id = newId;
+                        } else if (allPixels.at(i*128+j).id != allPixels.at((i+1) * 128 + j+1).id){
+                            changes = true;
+                            allPixels.at(i*128+j).voroni = true;
+                            allPixels.at((i+1) * 128 + j+1).voroni = true;
+                        }
+                    }
+
+                    
+
+
+
                 }
             }
+
         }
     }
+
+    for (int x = 0; x < 128; x++){
+        for (int y = 0; y < 128; y++){
+            int id = 
+        }
+    }
+
+
+    
+
+
 }
 int heuristic(Pixel pixel)
 {
