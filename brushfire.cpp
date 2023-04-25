@@ -182,6 +182,21 @@ void driveToPoint(vector<Pixel> points)
         printf("Pixel: (%i, %i) => (%f, %f)\n", path.at(j).x, path.at(j).y, x, y);
     }
 
+    for (int k = 0; k < path.size(); k++){
+        float x = curX - convertPointsX(path.at(k).x);
+        float y = curY - convertPointsY(path.at(k).y);
+
+        
+
+        int rot = atan2(x, y)*M_PI - curAng;
+        int dist = sqrt(x*x+y*y);
+
+        VWTurn(rot, 100);
+        VWWait();
+        VWStraight(dist, 100);
+        VWWait();
+    }
+
     
 
 
