@@ -388,9 +388,17 @@ void brushFire()
         for (int x = 0; x < 128; x++){
             for (int y = 0; y < 128; y++){
                 int id = allPixels.at(x*128+y).id;
-                if (id != -1){
+                if (allPixels.at(x*128+y).voroni){
+                    if (id != -1){
+                    LCDArea(y, x, y+1, x+1, Colours.at(6), 1);
+                    }
+                } else{
+                    if (id != -1){
                     LCDArea(y, x, y+1, x+1, Colours.at(id), 1);
+                    }
                 }
+                
+                
                 
             }
         }
@@ -417,6 +425,7 @@ int main()
     Colours.push_back(PURPLE);
     Colours.push_back(NAVY);
     Colours.push_back(DARKGRAY);
+    Colours.push_back(BLACK);
     readImage();
     LCDImageStart(0, 0, IMAGESIZE, IMAGESIZE);
     LCDImageBinary(image);
