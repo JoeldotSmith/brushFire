@@ -405,11 +405,6 @@ void brushFire()
         
     }
 
-    
-
-
-    
-
 
 }
 int heuristic(Pixel pixel)
@@ -450,6 +445,7 @@ int main()
             brushFire();
             break;
         case KEY4:
+            endSim = 1;
             break;
         }
     } while (!endSim);
