@@ -174,7 +174,7 @@ void driveToPoint(vector<Pixel> points)
 
     }
     path.push_back(goal);
-
+    LCDCircle(16, 16, 5, SILVER, 1);
     for (int j = 0; j < path.size(); j++){
         LCDCircle(path.at(j).y, path.at(j).x, 5, SILVER, 1);
         float x = convertPointsX(path.at(j).x);
@@ -192,7 +192,7 @@ void driveToPoint(vector<Pixel> points)
 
         
 
-        int rot = atan2(y, x)*180/M_PI - curAng;
+        int rot = atan2(x, y)*180/M_PI - curAng;
         int dist = sqrt(x*x+y*y);
 
         printf("now turning %i\n", rot);
