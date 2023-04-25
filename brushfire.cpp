@@ -118,8 +118,8 @@ void driveToPoint(vector<Pixel> points)
 
     for (int i = 0; i < points.size(); i++){
 
-        float x = convertPointsX(points.at(i).x) - 500;//4000*(1-(points.at(i).x/128));
-        float y = convertPointsY(points.at(i).y) - 3500;//4000*(points.at(i).y/128);
+        float x = convertPointsX(points.at(i).x) - 3500;//4000*(1-(points.at(i).x/128));
+        float y = convertPointsY(points.at(i).y) - 500;//4000*(points.at(i).y/128);
         int newDist = sqrt(x*x+y*y);
 
         
