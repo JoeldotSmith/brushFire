@@ -99,39 +99,48 @@ vector<int> getReletiveGoalLocation(int x, int y, int curX, int curY)
     return callBack;
 }
 
-void driveToPoint(int x, int y)
+int convertPointsX(int x){
+    return 4000*(1-x/128);
+}
+int convertPointsY(int y){
+    return 4000*(y/128);
+}
+
+void driveToPoint(vector<Pixel> points)
 {
-    // TODO
+    int curX, curY, curAng;
+    VWSetPosition(0, 0, 0);
+    VWGetPosition(&curX, &curY, &curAng);
+
+    // find closest veroni point
+    Pixel pixel;
+    int dist = 10000;
+
+    for (int i = 0; i < points.size(); i++){
+        int x = convertPointsX(points.at(i).x);
+        int y = convertPointsY(points.at(i).y);
+        int newDist = sqrt(x*x+y*y);
+
+        printf("Pixel: (%i, %i), distFromPlayer; %i\n", convertPointsX(pixel.x), convertPointsY(pixel.y), dist);
+
+        if (newDist < dist){
+            pixel = points.at(i);
+            dist = newDist;
+        }
+    }
+    
+    
+
     return;
 }
 
-void LCDPixelBigger(int x, int y, COLOR colour)
-{
-    LCDArea(x ^ 2, y ^ 2, x ^ 2 + 2, y ^ 2 + 2, colour, 1);
-}
+
 
 void readImage()
 {
     read_pbm(fileName, &image); // same as last week but you might want to add walls aswell
 }
 
-void getObjectAndRemove(int id)
-{
-    for (int i = 0; i < allObject.size(); i++)
-    {
-        if (allObject.at(i).id == id)
-        {
-            allObject.erase(allObject.begin() + i);
-        }
-    }
-    return;
-}
-
-void resolveObject()
-{
-    // TODO may not be necessary, joins adjacent objects such as u object
-    return;
-}
 
 void groupPixel()
 { 
@@ -462,6 +471,7 @@ int main()
             break;
         case KEY3:
             printf("\n\n            Driving \n\n");
+            driveToPoint(voroniPoints);
             break;
         case KEY4:
             endSim = 1;
