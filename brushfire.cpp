@@ -117,17 +117,18 @@ void driveToPoint(vector<Pixel> points)
     int dist = 10000;
 
     for (int i = 0; i < points.size(); i++){
+        if ((5 < points.at(i).x && points.at(i).x < 123) && (5 < points.at(i).y && points.at(i).y < 123)){
+            float x = convertPointsX(points.at(i).x) - 3500;//4000*(1-(points.at(i).x/128));
+            float y = convertPointsY(points.at(i).y) - 500;//4000*(points.at(i).y/128);
+            int newDist = sqrt(x*x+y*y);
 
-        float x = convertPointsX(points.at(i).x) - 3500;//4000*(1-(points.at(i).x/128));
-        float y = convertPointsY(points.at(i).y) - 500;//4000*(points.at(i).y/128);
-        int newDist = sqrt(x*x+y*y);
+            if (newDist < dist){
+                pixel = points.at(i);
+                dist = newDist;
+            }
+        }
 
         
-
-        if (newDist < dist){
-            pixel = points.at(i);
-            dist = newDist;
-        }
     }
     float x = convertPointsX(pixel.x) - 3500;
     float y = convertPointsY(pixel.y) - 500;
