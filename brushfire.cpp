@@ -260,7 +260,7 @@ void brushFire()
         for (int i = 0; i < 128; i++){
             for (int j = 0; j < 128; j++){
                 if (allPixels.at(i*128+j).id != -1){
-                    int newId = allPixels.at(i * 128 + j).id != -1;
+                    int newId = allPixels.at(i * 128 + j).id;
 
 
                     if (j > 0 && i > 0){
@@ -350,10 +350,6 @@ void brushFire()
                             allPixels.at((i+1) * 128 + j+1).voroni = true;
                         }
                     }
-
-                    
-
-
 
                 }
             }
