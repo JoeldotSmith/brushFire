@@ -186,8 +186,8 @@ void driveToPoint(vector<Pixel> points)
         printf("Current Position: (%i, %i, %i)\n", curX, curY, curAng);
         
 
-        float x = convertPointsX(path.at(k).y)-curX;
-        float y = convertPointsY(path.at(k).x)-curY;
+        float x = convertPointsX(path.at(k).x)-curX;
+        float y = convertPointsY(path.at(k).y)-curY;
         printf("Moving: (%f, %f)\n", x, y);
 
         
