@@ -110,7 +110,7 @@ void driveToPoint(vector<Pixel> points)
 {
     int curX, curY, curAng;
     vector<Pixel> path;
-    VWSetPosition(3500, 500, 0);
+    VWSetPosition(500, 3500, 0);
     VWGetPosition(&curX, &curY, &curAng);
 
     // find closest veroni point
@@ -119,8 +119,8 @@ void driveToPoint(vector<Pixel> points)
 
     for (int i = 0; i < points.size(); i++){
         if ((10 < points.at(i).x && points.at(i).x < 118) && (10 < points.at(i).y && points.at(i).y < 118)){
-            float x = convertPointsX(points.at(i).x) - curX;
-            float y = convertPointsY(points.at(i).y) - curY;
+            float x = convertPointsX(points.at(i).x) - curY;
+            float y = convertPointsY(points.at(i).y) - curX;
             int newDist = sqrt(x*x+y*y);
 
             if (newDist < dist){
@@ -131,8 +131,8 @@ void driveToPoint(vector<Pixel> points)
 
         
     }
-    float x = convertPointsX(pixel.x) - curX;
-    float y = convertPointsY(pixel.y) - curY;
+    float x = convertPointsX(pixel.x) - curY;
+    float y = convertPointsY(pixel.y) - curX;
     
     
     path.push_back(pixel);
@@ -179,15 +179,15 @@ void driveToPoint(vector<Pixel> points)
         LCDCircle(path.at(j).y, path.at(j).x, 5, SILVER, 1);
         float x = convertPointsX(path.at(j).x);
         float y = convertPointsY(path.at(j).y);
-        printf("Pixel: (%i, %i) => (%f, %f)\n", path.at(j).x, path.at(j).y, x, y);
+        printf("Pixel: (%i, %i) => (%f, %f)\n", path.at(j).x, path.at(j).y, y, x);
     }
     printf("\n\n");
     for (int k = 0; k < path.size(); k++){
         printf("Current Position: (%i, %i, %i)\n", curX, curY, curAng);
         
 
-        float x = convertPointsX(path.at(k).x)-curX;
-        float y = convertPointsY(path.at(k).y)-curY;
+        float x = convertPointsX(path.at(k).x)-curY;
+        float y = convertPointsY(path.at(k).y)-curX;
         printf("Moving: (%f, %f)\n", x, y);
 
         
