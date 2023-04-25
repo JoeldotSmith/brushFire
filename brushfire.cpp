@@ -151,7 +151,6 @@ void driveToPoint(vector<Pixel> points)
         distToGoal = 100000;
         Pixel nextPixel;
         
-        printf("current point: (%i, %i)\n", currentPointX, currentPointY);
         for (int i = 0; i < points.size(); i++){ // for each point
             
             float x = points.at(i).x;
@@ -174,7 +173,10 @@ void driveToPoint(vector<Pixel> points)
         path.push_back(nextPixel);
 
     }
+    path.push_back(goal);
+
     for (int j = 0; j < path.size(); j++){
+        LCDCircle(path.at(j).x, path.at(j).y, 5, SILVER, 1);
         float x = convertPointsX(path.at(j).x);
         float y = convertPointsY(path.at(j).y);
         printf("Pixel: (%f, %f)\n", x, y);
