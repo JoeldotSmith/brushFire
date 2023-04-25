@@ -117,7 +117,7 @@ void driveToPoint(vector<Pixel> points)
     int dist = 10000;
 
     for (int i = 0; i < points.size(); i++){
-        if ((5 < points.at(i).x && points.at(i).x < 123) && (5 < points.at(i).y && points.at(i).y < 123)){
+        if ((10 < points.at(i).x && points.at(i).x < 118) && (10 < points.at(i).y && points.at(i).y < 118)){
             float x = convertPointsX(points.at(i).x) - 3500;//4000*(1-(points.at(i).x/128));
             float y = convertPointsY(points.at(i).y) - 500;//4000*(points.at(i).y/128);
             int newDist = sqrt(x*x+y*y);
@@ -132,7 +132,7 @@ void driveToPoint(vector<Pixel> points)
     }
     float x = convertPointsX(pixel.x) - 3500;
     float y = convertPointsY(pixel.y) - 500;
-    int rot = atan2(y, x) * 180 / M_PI;
+    int rot = atan2(x, y) * 180 / M_PI;
     printf("Pixel: (%i, %i) => (%f, %f), distFromPlayer; %i\n", pixel.x, pixel.y, x, y, dist);
     VWTurn(rot, 100);
     VWWait();
