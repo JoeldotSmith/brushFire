@@ -192,7 +192,7 @@ void driveToPoint(vector<Pixel> points)
 
         
 
-        int rot = atan2(y, x)*M_PI - curAng;
+        int rot = atan2(y, x)*180/M_PI - curAng;
         int dist = sqrt(x*x+y*y);
 
         printf("now turning %i\n", rot);
