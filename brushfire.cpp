@@ -201,9 +201,10 @@ void driveToPoint(vector<Pixel> points)
         printf("now driving %i\n", dist);
         VWStraight(dist, 50);
         VWWait();
-        curX = x +curX;
-        curY = y +curY;
-        curAng = rot +curAng;
+        // curX = x +curX;
+        // curY = y +curY;
+        // curAng = rot +curAng;
+        VWGetPosition(&curY, &curX, &curAng);
     }
 
     
