@@ -129,7 +129,10 @@ void driveToPoint(vector<Pixel> points)
             dist = newDist;
         }
     }
-    printf("Pixel: (%i, %i), distFromPlayer; %i\n", pixel.x, pixel.y, dist);
+    float x = convertPointsX(pixel.x) - 3500;
+    float y = convertPointsY(pixel.y) - 500;
+    printf("Pixel: (%i, %i) => (%f, %f), distFromPlayer; %i\n", pixel.x, pixel.y, x, y, dist);
+
     
     
 
