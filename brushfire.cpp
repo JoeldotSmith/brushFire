@@ -110,7 +110,7 @@ void driveToPoint(vector<Pixel> points)
 {
     int curX, curY, curAng;
     vector<Pixel> path;
-    VWSetPosition(3500, 500, 0);
+    VWSetPosition(500, 3500, 0);
     VWGetPosition(&curX, &curY, &curAng);
 
     // find closest veroni point
@@ -186,13 +186,13 @@ void driveToPoint(vector<Pixel> points)
         printf("Current Position: (%i, %i, %i)\n", curX, curY, curAng);
         
 
-        float x = convertPointsX(path.at(k).x)-curX;
-        float y = convertPointsY(path.at(k).y)-curY;
+        float x = convertPointsX(path.at(k).y)-curX;
+        float y = convertPointsY(path.at(k).x)-curY;
         printf("Moving: (%f, %f)\n", x, y);
 
         
 
-        int rot = atan2(x, y)*180/M_PI - curAng;
+        int rot = atan2(y, x)*180/M_PI - curAng;
         int dist = sqrt(x*x+y*y);
 
         printf("now turning %i\n", rot);
