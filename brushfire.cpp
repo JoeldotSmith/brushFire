@@ -156,7 +156,7 @@ void driveToPoint(vector<Pixel> points)
             float x = points.at(i).x;
             float y = points.at(i).y;
 
-            if (abs(x-currentPointX) < 10 && abs(y-currentPointY) < 10){ // check all points with in 10 Image points
+            if (abs(x-currentPointX) < 5 && abs(y-currentPointY) < 5){ // check all points with in 10 Image points
                 float distToGoal = sqrt((goal.x-x)*(goal.x-x)+(goal.y-y)*(goal.y-y));
                 if (distToGoal < shortestDist){
                     shortestDist = distToGoal;
