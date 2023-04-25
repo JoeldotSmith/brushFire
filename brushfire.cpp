@@ -110,7 +110,7 @@ void driveToPoint(vector<Pixel> points)
 {
     int curX, curY, curAng;
     vector<Pixel> path;
-    VWSetPosition(500, 3500, 0);
+    VWSetPosition(3500, 500, 0);
     VWGetPosition(&curX, &curY, &curAng);
 
     // find closest veroni point
