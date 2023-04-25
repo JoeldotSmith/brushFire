@@ -260,11 +260,12 @@ void brushFire()
         for (int i = 0; i < 128; i++){
             for (int j = 0; j < 128; j++){
                 if (allPixels.at(i*128+j).id != -1){
+                    printf("pixel: (%i, %i)\n", allPixels.at(i*128+j).x, allPixels.at(i*128+j).y);
                     int newId = allPixels.at(i * 128 + j).id;
 
 
                     if (j > 0 && i > 0){
-                        printf("does it make it here 1\n");
+                       
                         if (allPixels.at((i-1) * 128 + j-1).id == -1){
                             changes = true;
                             allPixels.at((i - 1) * 128 + j - 1).id = newId;
@@ -276,7 +277,7 @@ void brushFire()
                     }
 
                     if (j > 0){
-                        printf("does it make it here 2\n");
+                        
                         if (allPixels.at((i) * 128 + j-1).id == -1){
                             changes = true;
                             allPixels.at((i) * 128 + j - 1).id = newId;
@@ -288,7 +289,7 @@ void brushFire()
                     }
 
                     if (j > 0 && i < 128){
-                        printf("does it make it here 3\n");
+                        
                         if (allPixels.at((i+1) * 128 + j-1).id == -1){
                             changes = true;
                             allPixels.at((i + 1) * 128 + j - 1).id = newId;
@@ -300,7 +301,7 @@ void brushFire()
                     }
 
                     if (i > 0){
-                        printf("does it make it here 4\n");
+                        
                         if (allPixels.at((i-1) * 128 + j).id == -1){
                             allPixels.at((i-1) * 128 + j).id = newId;
                             changes = true;
@@ -312,7 +313,7 @@ void brushFire()
                     }
 
                     if (i < 128){
-                        printf("does it make it here 5\n");
+                        
                         if (allPixels.at((i+1) * 128 + j).id == -1){
                             changes = true;
                             allPixels.at((i+1) * 128 + j).id = newId;
@@ -324,7 +325,7 @@ void brushFire()
                     }
 
                     if (j < 128 && i > 0){
-                        printf("does it make it here 6\n");
+                        
                         if (allPixels.at((i-1) * 128 + j+1).id == -1){
                             changes = true;
                             allPixels.at((i - 1) * 128 + j - 1).id = newId;
@@ -336,7 +337,7 @@ void brushFire()
                     }
 
                     if (j < 128){
-                        printf("does it make it here 7\n");
+                        
                         if (allPixels.at((i) * 128 + j+1).id == -1){
                             changes = true;
                             allPixels.at((i) * 128 + j + 1).id = newId;
@@ -348,7 +349,7 @@ void brushFire()
                     }
 
                     if (j < 128 && i < 128){
-                        printf("does it make it here 8\n");
+                        
                         if (allPixels.at((i+1) * 128 + j+1).id == -1){
                             changes = true;
                             allPixels.at((i + 1) * 128 + j - 1).id = newId;
@@ -363,15 +364,15 @@ void brushFire()
             }
 
         }
-        // for (int x = 0; x < 128; x++){
-        //     for (int y = 0; y < 128; y++){
-        //         int id = allPixels.at(x*128+y).id;
-        //         if (id != -1){
-        //             LCDArea(y, x, y+1, x+1, Colours.at(id), 1);
-        //         }
+        for (int x = 0; x < 128; x++){
+            for (int y = 0; y < 128; y++){
+                int id = allPixels.at(x*128+y).id;
+                if (id != -1){
+                    LCDArea(y, x, y+1, x+1, Colours.at(id), 1);
+                }
                 
-        //     }
-        // }
+            }
+        }
     }
 
     
