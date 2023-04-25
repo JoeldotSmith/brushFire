@@ -149,27 +149,30 @@ void driveToPoint(vector<Pixel> points)
     while (distToGoal > 10){
         shortestDist = 100000;
         distToGoal = 100000;
+        Pixel nextPixel;
         
         printf("current point: (%i, %i)\n", currentPointX, currentPointY);
         for (int i = 0; i < points.size(); i++){ // for each point
-            Pixel nextPixel;
+            
             float x = points.at(i).x;
             float y = points.at(i).y;
 
-            if (abs(x-currentPointX) < 6 && abs(y-currentPointY) < 6){ // check all points with in 6 Image points
+            if (abs(x-currentPointX) < 10 && abs(y-currentPointY) < 10){ // check all points with in 10 Image points
                 float distToGoal = sqrt((goal.x-x)*(goal.x-x)+(goal.y-y)*(goal.y-y));
                 if (distToGoal < shortestDist){
                     shortestDist = distToGoal;
                     nextPixel = points.at(i);
                 }
-
+                
             }
-            currentPointX = x;
-            currentPointY = y;
-            path.push_back(nextPixel);
+            
 
 
         }
+        currentPointX = nextPixel.x;
+        currentPointY = nextPixel.y;
+        path.push_back(nextPixel);
+
     }
     for (int j = 0; j < path.size(); j++){
         float x = convertPointsX(path.at(j).x);
