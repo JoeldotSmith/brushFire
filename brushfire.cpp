@@ -431,7 +431,7 @@ int main()
 
     // drive to goal, following the path
 
-    LCDMenu("PLAY", "", "", "EXIT");
+    LCDMenu("FIND", "FIRE", "DRIVE", "EXIT");
     int endSim = 0; // boolean to end sim 0 = false, 1 = true
 
     do
@@ -440,8 +440,8 @@ int main()
         {
         case KEY1:
             groupPixel();
-            
-            KEYWait(KEY1);
+            break;
+        case KEY2:
             brushFire();
             break;
         case KEY4:
