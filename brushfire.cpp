@@ -131,7 +131,13 @@ void driveToPoint(vector<Pixel> points)
     }
     float x = convertPointsX(pixel.x) - 3500;
     float y = convertPointsY(pixel.y) - 500;
+    int rot = atan2(y, x) * 180 / M_PI;
     printf("Pixel: (%i, %i) => (%f, %f), distFromPlayer; %i\n", pixel.x, pixel.y, x, y, dist);
+    VWTurn(rot, 100);
+    VWWait();
+    VWStraight(dist, 100);
+    VWWait();
+
 
     
     
