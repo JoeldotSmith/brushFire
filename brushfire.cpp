@@ -150,7 +150,7 @@ void driveToPoint(vector<Pixel> points)
         shortestDist = 100000;
         distToGoal = 100000;
         
-        printf("finding next point\n");
+        printf("current point: (%i, %i)\n", currentPointX, currentPointY);
         for (int i = 0; i < points.size(); i++){ // for each point
             Pixel nextPixel;
             float x = convertPointsX(points.at(i).x);
