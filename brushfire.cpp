@@ -73,7 +73,7 @@ typedef struct Walls
 } Walls;
 
 // World Name
-const char *fileName = "fourblocks.pbm";
+const char *fileName = "u.pbm";
 vector<int> Colours;
 
 
