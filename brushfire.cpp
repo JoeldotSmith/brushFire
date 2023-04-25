@@ -146,7 +146,7 @@ void driveToPoint(vector<Pixel> points)
     goal.x = 112;
     goal.y = 112;
 
-    while (distToGoal > 10){
+    while (currentPointX != 99 && currentPointY != 119){
         shortestDist = 100000;
         distToGoal = 100000;
         Pixel nextPixel;
