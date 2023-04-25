@@ -413,8 +413,8 @@ int main()
     Colours.push_back(RED);
     Colours.push_back(GREEN);
     Colours.push_back(CYAN);
-    Colours.push_back(PURPLE);
-    Colours.push_back(NAVY);
+    Colours.push_back(MAGENTA);
+    Colours.push_back(MAGENTA);
     Colours.push_back(DARKGRAY);
     Colours.push_back(BLACK);
     readImage();
