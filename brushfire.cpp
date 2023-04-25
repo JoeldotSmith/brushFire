@@ -109,7 +109,8 @@ float convertPointsY(float y){
 void driveToPoint(vector<Pixel> points)
 {
     int curX, curY, curAng;
-    VWSetPosition(0, 0, 0);
+    vector<Pixel> path;
+    VWSetPosition(3500, 500, 0);
     VWGetPosition(&curX, &curY, &curAng);
 
     // find closest veroni point
@@ -118,8 +119,8 @@ void driveToPoint(vector<Pixel> points)
 
     for (int i = 0; i < points.size(); i++){
         if ((10 < points.at(i).x && points.at(i).x < 118) && (10 < points.at(i).y && points.at(i).y < 118)){
-            float x = convertPointsX(points.at(i).x) - 3500;//4000*(1-(points.at(i).x/128));
-            float y = convertPointsY(points.at(i).y) - 500;//4000*(points.at(i).y/128);
+            float x = convertPointsX(points.at(i).x) - curX;
+            float y = convertPointsY(points.at(i).y) - curY;
             int newDist = sqrt(x*x+y*y);
 
             if (newDist < dist){
@@ -130,14 +131,51 @@ void driveToPoint(vector<Pixel> points)
 
         
     }
-    float x = convertPointsX(pixel.x) - 3500;
-    float y = convertPointsY(pixel.y) - 500;
-    int rot = atan2(x, y) * 180 / M_PI;
+    float x = convertPointsX(pixel.x) - curX;
+    float y = convertPointsY(pixel.y) - curY;
     printf("Pixel: (%i, %i) => (%f, %f), distFromPlayer; %i\n", pixel.x, pixel.y, x, y, dist);
-    VWTurn(rot, 100);
-    VWWait();
-    VWStraight(dist, 100);
-    VWWait();
+    
+    path.push_back(pixel);
+
+
+    int currentPointX = x;
+    int currentPointY = y;
+    int shortestDist = 100000;
+    int distToGoal = 100000;
+    Pixel goal;
+    goal.x = 500;
+    goal.y = 3500;
+
+    while (distToGoal > 500){
+        for (int i = 0; i < points.size(); i++){ // for each point
+            Pixel nextPixel;
+            float x = convertPointsX(points.at(i).x) - currentPointX;
+            float y = convertPointsY(points.at(i).y) - currentPointY;
+
+            if (abs(x-curX) < 100 && abs(y-curY) < 100){ // check all points with in 100
+                int distToGoal = sqrt((x-goal.x)*(x-goal.x)+(y-goal.y)*(y-goal.y));
+                if (distToGoal < shortestDist){
+                    nextPixel = points.at(i);
+                }
+
+            }
+            currentPointX = x;
+            currentPointY = y;
+            path.push_back(nextPixel);
+
+
+        }
+    }
+    for (int j = 0; j < path.size(); j++){
+        float x = convertPointsX(path.at(j).x);
+        float y = convertPointsY(path.at(j).y);
+        printf("Pixel: (%f, %f)\n", x, y);
+    }
+
+    
+
+
+
 
 
     
