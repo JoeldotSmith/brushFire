@@ -260,9 +260,9 @@ void brushFire()
         for (int i = 0; i < 128; i++){
             for (int j = 0; j < 128; j++){
                 if (allPixels.at(i*128+j).id != -1){
-                    printf("pixel: (%i, %i)\n", allPixels.at(i*128+j).x, allPixels.at(i*128+j).y);
+                    
                     int newId = allPixels.at(i * 128 + j).id;
-
+                    printf("pixel: (%i, %i), id: %i\n", allPixels.at(i*128+j).x, allPixels.at(i*128+j).y, newId);
 
                     if (j > 0 && i > 0){
                        
