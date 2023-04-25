@@ -80,6 +80,7 @@ vector<int> Colours;
 // Globals
 BYTE *image;
 vector<Pixel> allPixels;
+vector<Pixel> voroniPoints;
 vector<Object> allObject;
 int numberOfObjects = 0;
 
@@ -275,6 +276,8 @@ void brushFire()
                             
                             allPixels.at(i*128+j).voroni = true;
                             allPixels.at((i-1) * 128 + j-1).voroni = true;
+                            voroniPoints.push_back(allPixels.at(i*128+j));
+                            voroniPoints.push_back(allPixels.at((i-1) * 128 + j-1));
                             allPixels.at((i - 1) * 128 + j - 1).lastChanged = lastChanged;
                         }
                     }
@@ -289,6 +292,9 @@ void brushFire()
                             
                             allPixels.at(i*128+j).voroni = true;
                             allPixels.at((i) * 128 + j-1).voroni = true;
+                            voroniPoints.push_back(allPixels.at(i*128+j));
+                            voroniPoints.push_back(allPixels.at((i) * 128 + j-1));
+                            
                             allPixels.at((i) * 128 + j - 1).lastChanged = lastChanged;
                         }
                     }
@@ -303,6 +309,8 @@ void brushFire()
                             
                             allPixels.at(i*128+j).voroni = true;
                             allPixels.at((i+1) * 128 + j-1).voroni = true;
+                            voroniPoints.push_back(allPixels.at(i*128+j));
+                            voroniPoints.push_back(allPixels.at((i + 1) * 128 + j - 1));
                             allPixels.at((i + 1) * 128 + j - 1).lastChanged = lastChanged;
                         }
                     }
@@ -317,6 +325,8 @@ void brushFire()
                             
                             allPixels.at(i*128+j).voroni = true;
                             allPixels.at((i-1) * 128 + j).voroni = true;
+                            voroniPoints.push_back(allPixels.at(i*128+j));
+                            voroniPoints.push_back(allPixels.at((i - 1) * 128 + j));
                             allPixels.at((i - 1) * 128 + j).lastChanged = lastChanged;
                         }
                     }
@@ -331,6 +341,8 @@ void brushFire()
                             
                             allPixels.at(i*128+j).voroni = true;
                             allPixels.at((i+1) * 128 + j).voroni = true;
+                            voroniPoints.push_back(allPixels.at(i*128+j));
+                            voroniPoints.push_back(allPixels.at((i+1) * 128 + j));
                             allPixels.at((i + 1) * 128 + j).lastChanged = lastChanged;
                         }
                     }
@@ -345,6 +357,8 @@ void brushFire()
                             
                             allPixels.at(i*128+j).voroni = true;
                             allPixels.at((i-1) * 128 + j+1).voroni = true;
+                            voroniPoints.push_back(allPixels.at(i*128+j));
+                            voroniPoints.push_back(allPixels.at((i-1) * 128 + j+1));
                             allPixels.at((i - 1) * 128 + j + 1).lastChanged = lastChanged;
                         }
                     }
@@ -359,6 +373,8 @@ void brushFire()
                             
                             allPixels.at(i*128+j).voroni = true;
                             allPixels.at((i) * 128 + j+1).voroni = true;
+                            voroniPoints.push_back(allPixels.at(i*128+j));
+                            voroniPoints.push_back(allPixels.at((i) * 128 + j+1));
                             allPixels.at((i) * 128 + j + 1).lastChanged = lastChanged;
                         }
                     }
@@ -373,6 +389,8 @@ void brushFire()
                             
                             allPixels.at(i*128+j).voroni = true;
                             allPixels.at((i+1) * 128 + j+1).voroni = true;
+                            voroniPoints.push_back(allPixels.at(i*128+j));
+                            voroniPoints.push_back(allPixels.at((i+1) * 128 + j+1));
                             allPixels.at((i + 1) * 128 + j + 1).lastChanged = lastChanged;
                         }
                     }
