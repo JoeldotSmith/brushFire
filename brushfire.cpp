@@ -183,8 +183,8 @@ void driveToPoint(vector<Pixel> points)
     }
     printf("\n\n");
     for (int k = 0; k < path.size(); k++){
-        float x = curX - convertPointsX(path.at(k).x);
-        float y = curY - convertPointsY(path.at(k).y);
+        float x = convertPointsX(path.at(k).x)-curY;
+        float y = convertPointsY(path.at(k).y)-curX;
 
         
 
