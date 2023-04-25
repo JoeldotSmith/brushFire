@@ -133,7 +133,7 @@ void driveToPoint(vector<Pixel> points)
     }
     float x = convertPointsX(pixel.x) - curX;
     float y = convertPointsY(pixel.y) - curY;
-    printf("Pixel: (%i, %i) => (%f, %f), distFromPlayer; %i\n", pixel.x, pixel.y, x, y, dist);
+    
     
     path.push_back(pixel);
 
@@ -179,7 +179,7 @@ void driveToPoint(vector<Pixel> points)
         LCDCircle(path.at(j).y, path.at(j).x, 5, SILVER, 1);
         float x = convertPointsX(path.at(j).x);
         float y = convertPointsY(path.at(j).y);
-        printf("Pixel: (%f, %f)\n", x, y);
+        printf("Pixel: (%i, %i) => (%f, %f)\n", path.at(j).x, path.at(j).y, x, y);
     }
 
     
@@ -323,7 +323,7 @@ void groupPixel()
 
 void brushFire()
 {
-    
+    printf("please wait...\n");
     bool changes = true;
     int lastChanged = 0;
     while (changes){
@@ -491,6 +491,7 @@ void brushFire()
         }
         
     }
+    printf("\n\n            Finished Burning \n\n");
 
 
 }
