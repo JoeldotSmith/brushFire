@@ -18,12 +18,12 @@ typedef struct Pixel
     int x;
     int y;
     int id ;
-    int expansion;
+    int lastChanged;
     int value;
     bool voroni;
     vector<int> allObjectId;
 
-    Pixel() : x(-1), y(-1), id(-1), expansion(0), value(-1), voroni(false) {};
+    Pixel() : x(-1), y(-1), id(-1), lastChanged(-1), value(-1), voroni(false) {};
 } Pixel;
 
 typedef struct Object
@@ -255,11 +255,12 @@ void brushFire()
 {
     
     bool changes = true;
+    int lastChanged = 0;
     while (changes){
         changes = false;
         for (int i = 0; i < 128; i++){
             for (int j = 0; j < 128; j++){
-                if (allPixels.at(i*128+j).id != -1){
+                if (allPixels.at(i*128+j).id != -1 && (lastChanged != allPixels.at(i*128+j).lastChanged)){
                     
                     int newId = allPixels.at(i * 128 + j).id;
                     printf("pixel: (%i, %i), id: %i\n", allPixels.at(i*128+j).x, allPixels.at(i*128+j).y, newId);
@@ -269,10 +270,12 @@ void brushFire()
                         if (allPixels.at((i-1) * 128 + j-1).id == -1){
                             changes = true;
                             allPixels.at((i - 1) * 128 + j - 1).id = newId;
+                            allPixels.at((i - 1) * 128 + j - 1).lastChanged = lastChanged;
                         } else if (allPixels.at(i*128+j).id != allPixels.at((i-1) * 128 + j-1).id){
                             changes = true;
                             allPixels.at(i*128+j).voroni = true;
                             allPixels.at((i-1) * 128 + j-1).voroni = true;
+                            allPixels.at((i - 1) * 128 + j - 1).lastChanged = lastChanged;
                         }
                     }
 
@@ -281,10 +284,12 @@ void brushFire()
                         if (allPixels.at((i) * 128 + j-1).id == -1){
                             changes = true;
                             allPixels.at((i) * 128 + j - 1).id = newId;
+                            allPixels.at((i) * 128 + j - 1).lastChanged = lastChanged;
                         } else if (allPixels.at(i*128+j).id != allPixels.at((i) * 128 + j-1).id){
                             changes = true;
                             allPixels.at(i*128+j).voroni = true;
                             allPixels.at((i) * 128 + j-1).voroni = true;
+                            allPixels.at((i) * 128 + j - 1).lastChanged = lastChanged;
                         }
                     }
 
@@ -293,10 +298,12 @@ void brushFire()
                         if (allPixels.at((i+1) * 128 + j-1).id == -1){
                             changes = true;
                             allPixels.at((i + 1) * 128 + j - 1).id = newId;
+                            allPixels.at((i + 1) * 128 + j - 1).lastChanged = lastChanged;
                         } else if (allPixels.at(i*128+j).id != allPixels.at((i+1) * 128 + j-1).id){
                             changes = true;
                             allPixels.at(i*128+j).voroni = true;
                             allPixels.at((i+1) * 128 + j-1).voroni = true;
+                            allPixels.at((i + 1) * 128 + j - 1).lastChanged = lastChanged;
                         }
                     }
 
@@ -305,10 +312,12 @@ void brushFire()
                         if (allPixels.at((i-1) * 128 + j).id == -1){
                             allPixels.at((i-1) * 128 + j).id = newId;
                             changes = true;
+                            allPixels.at((i - 1) * 128 + j).lastChanged = lastChanged;
                         } else if (allPixels.at(i*128+j).id != allPixels.at((i-1) * 128 + j).id){
                             changes = true;
                             allPixels.at(i*128+j).voroni = true;
                             allPixels.at((i-1) * 128 + j).voroni = true;
+                            allPixels.at((i - 1) * 128 + j).lastChanged = lastChanged;
                         }
                     }
 
@@ -317,10 +326,12 @@ void brushFire()
                         if (allPixels.at((i+1) * 128 + j).id == -1){
                             changes = true;
                             allPixels.at((i+1) * 128 + j).id = newId;
+                            allPixels.at((i + 1) * 128 + j).lastChanged = lastChanged;
                         } else if (allPixels.at(i*128+j).id != allPixels.at((i+1) * 128 + j).id){
                             changes = true;
                             allPixels.at(i*128+j).voroni = true;
                             allPixels.at((i+1) * 128 + j).voroni = true;
+                            allPixels.at((i + 1) * 128 + j).lastChanged = lastChanged;
                         }
                     }
 
@@ -328,11 +339,13 @@ void brushFire()
                         
                         if (allPixels.at((i-1) * 128 + j+1).id == -1){
                             changes = true;
-                            allPixels.at((i - 1) * 128 + j - 1).id = newId;
+                            allPixels.at((i - 1) * 128 + j + 1).id = newId;
+                            allPixels.at((i - 1) * 128 + j + 1).lastChanged = lastChanged;
                         } else if (allPixels.at(i*128+j).id != allPixels.at((i-1) * 128 + j+1).id){
                             changes = true;
                             allPixels.at(i*128+j).voroni = true;
                             allPixels.at((i-1) * 128 + j+1).voroni = true;
+                            allPixels.at((i - 1) * 128 + j + 1).lastChanged = lastChanged;
                         }
                     }
 
@@ -341,10 +354,12 @@ void brushFire()
                         if (allPixels.at((i) * 128 + j+1).id == -1){
                             changes = true;
                             allPixels.at((i) * 128 + j + 1).id = newId;
+                            allPixels.at((i) * 128 + j + 1).lastChanged = lastChanged;
                         } else if (allPixels.at(i*128+j).id != allPixels.at((i) * 128 + j+1).id){
                             changes = true;
                             allPixels.at(i*128+j).voroni = true;
                             allPixels.at((i) * 128 + j+1).voroni = true;
+                            allPixels.at((i) * 128 + j + 1).lastChanged = lastChanged;
                         }
                     }
 
@@ -352,11 +367,13 @@ void brushFire()
                         
                         if (allPixels.at((i+1) * 128 + j+1).id == -1){
                             changes = true;
-                            allPixels.at((i + 1) * 128 + j - 1).id = newId;
+                            allPixels.at((i + 1) * 128 + j + 1).id = newId;
+                            allPixels.at((i + 1) * 128 + j + 1).lastChanged = lastChanged;
                         } else if (allPixels.at(i*128+j).id != allPixels.at((i+1) * 128 + j+1).id){
                             changes = true;
                             allPixels.at(i*128+j).voroni = true;
                             allPixels.at((i+1) * 128 + j+1).voroni = true;
+                            allPixels.at((i + 1) * 128 + j + 1).lastChanged = lastChanged;
                         }
                     }
 
@@ -367,11 +384,18 @@ void brushFire()
             }
 
         }
+        lastChanged++;
         for (int x = 0; x < 128; x++){
             for (int y = 0; y < 128; y++){
                 int id = allPixels.at(x*128+y).id;
+                int Col = Colours.at(id);
+                // if (allPixels.at(x*128+y).voroni){
+                //     Col = BLACK;
+                // } else{
+                //     Col = Colours.at(id);
+                // }
                 if (id != -1){
-                    LCDArea(y, x, y+1, x+1, Colours.at(id), 1);
+                    LCDArea(y, x, y+1, x+1, Col, 1);
                 }
                 
             }
