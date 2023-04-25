@@ -147,6 +147,9 @@ void driveToPoint(vector<Pixel> points)
     goal.y = 3500;
 
     while (distToGoal > 500){
+        shortestDist = 100000;
+        distToGoal = 100000;
+        
         printf("finding next point\n");
         for (int i = 0; i < points.size(); i++){ // for each point
             Pixel nextPixel;
