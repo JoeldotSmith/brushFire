@@ -1,0 +1,8 @@
+world rectangles.wld
+
+settings VIS TRACE
+
+S4 500 3500 0
+
+marker 3500 500 0 0 255
+marker 500 3500 0 0 255
