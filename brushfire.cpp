@@ -205,6 +205,7 @@ void driveToPoint(vector<Pixel> points)
         // VWWait();
         printf("now driving %i\n", dist);
         while (abs(curX-y) > 50 && abs(curY-x) > 50){
+            printf("curX-y = %i, curY-x = %i\n", abs(curX-y), abs(curY-x));
             VWSetSpeed(50, 0);
             VWGetPosition(&curX, &curY, &curAng);
         }
