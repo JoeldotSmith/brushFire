@@ -196,9 +196,9 @@ void driveToPoint(vector<Pixel> points)
         int dist = sqrt(x*x+y*y);
 
         printf("now turning %i\n", rot);
-        while(abs(rot-curAng) > 2){
+        while(abs(rot-curAng) > 5){
             int angle = rot-curAng/abs(rot-curAng);
-            VWTurn(angle*5, 100);
+            VWTurn(angle, 100);
             VWWait();
             VWGetPosition(&curX, &curY, &curAng);
         }
