@@ -129,6 +129,7 @@ void driveToPoint(vector<Pixel> points)
             dist = newDist;
         }
     }
+    printf("Pixel: (%i, %i), distFromPlayer; %i\n", pixel.x, pixel.y, dist);
     
     
 
