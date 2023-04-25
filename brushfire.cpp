@@ -150,10 +150,10 @@ void driveToPoint(vector<Pixel> points)
         printf("finding next point\n");
         for (int i = 0; i < points.size(); i++){ // for each point
             Pixel nextPixel;
-            float x = convertPointsX(points.at(i).x) - currentPointX;
-            float y = convertPointsY(points.at(i).y) - currentPointY;
+            float x = convertPointsX(points.at(i).x);
+            float y = convertPointsY(points.at(i).y);
 
-            if (abs(x-curX) < 100 && abs(y-curY) < 100){ // check all points with in 100
+            if (abs(x-currentPointX) < 100 && abs(y-currentPointY) < 100){ // check all points with in 100
                 int distToGoal = sqrt((x-goal.x)*(x-goal.x)+(y-goal.y)*(y-goal.y));
                 if (distToGoal < shortestDist){
                     nextPixel = points.at(i);
