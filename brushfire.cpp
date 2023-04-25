@@ -99,10 +99,10 @@ vector<int> getReletiveGoalLocation(int x, int y, int curX, int curY)
     return callBack;
 }
 
-float convertPointsX(int x){
+float convertPointsX(float x){
     return (4000*(1-x/128));
 }
-float convertPointsY(int y){
+float convertPointsY(float y){
     return (4000*(y/128));
 }
 
@@ -118,8 +118,8 @@ void driveToPoint(vector<Pixel> points)
 
     for (int i = 0; i < points.size(); i++){
 
-        double x = 4000*(1-(points.at(i).x/128));
-        double y = 4000*((points.at(i).y/128));
+        float x = convertPointsX(points.at(i).x);//4000*(1-(points.at(i).x/128));
+        float y = convertPointsY(points.at(i).y);//4000*(points.at(i).y/128);
         int newDist = sqrt(x*x+y*y);
 
         printf("Pixel: (%i, %i) => (%f, %f), distFromPlayer; %i\n", points.at(i).x, points.at(i).y, x, y, dist);
