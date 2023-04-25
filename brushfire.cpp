@@ -288,7 +288,7 @@ void brushFire()
                         }
                     }
 
-                    if (j > 0 && i < 128){
+                    if (j > 0 && i < 127){
                         
                         if (allPixels.at((i+1) * 128 + j-1).id == -1){
                             changes = true;
@@ -312,7 +312,7 @@ void brushFire()
                         }
                     }
 
-                    if (i < 128){
+                    if (i < 127){
                         
                         if (allPixels.at((i+1) * 128 + j).id == -1){
                             changes = true;
@@ -324,7 +324,7 @@ void brushFire()
                         }
                     }
 
-                    if (j < 128 && i > 0){
+                    if (j < 127 && i > 0){
                         
                         if (allPixels.at((i-1) * 128 + j+1).id == -1){
                             changes = true;
@@ -336,7 +336,7 @@ void brushFire()
                         }
                     }
 
-                    if (j < 128){
+                    if (j < 127){
                         
                         if (allPixels.at((i) * 128 + j+1).id == -1){
                             changes = true;
@@ -348,7 +348,7 @@ void brushFire()
                         }
                     }
 
-                    if (j < 128 && i < 128){
+                    if (j < 127 && i < 127){
                         
                         if (allPixels.at((i+1) * 128 + j+1).id == -1){
                             changes = true;
@@ -362,18 +362,19 @@ void brushFire()
 
                 }
 
-                for (int x = 0; x < 128; x++){
-                    for (int y = 0; y < 128; y++){
-                        int id = allPixels.at(x*128+y).id;
-                        if (id != -1){
-                            LCDArea(y, x, y+1, x+1, Colours.at(id), 1);
-                        }
-                        
-                    }
-                }
+                
 
             }
 
+        }
+        for (int x = 0; x < 128; x++){
+            for (int y = 0; y < 128; y++){
+                int id = allPixels.at(x*128+y).id;
+                if (id != -1){
+                    LCDArea(y, x, y+1, x+1, Colours.at(id), 1);
+                }
+                
+            }
         }
         
     }
