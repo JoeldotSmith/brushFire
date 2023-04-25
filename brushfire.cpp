@@ -147,6 +147,7 @@ void driveToPoint(vector<Pixel> points)
     goal.y = 3500;
 
     while (distToGoal > 500){
+        printf("finding next point\n");
         for (int i = 0; i < points.size(); i++){ // for each point
             Pixel nextPixel;
             float x = convertPointsX(points.at(i).x) - currentPointX;
