@@ -122,7 +122,7 @@ void driveToPoint(vector<Pixel> points)
         int y = convertPointsY(points.at(i).y);
         int newDist = sqrt(x*x+y*y);
 
-        printf("Pixel: (%i, %i) => (%), distFromPlayer; %i\n", convertPointsX(pixel.x), convertPointsY(pixel.y), dist);
+        printf("Pixel: (%i, %i) => (%i, %i), distFromPlayer; %i\n", points.at(i).x, points.at(i).y, x, y, dist);
 
         if (newDist < dist){
             pixel = points.at(i);
