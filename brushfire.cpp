@@ -192,16 +192,27 @@ void driveToPoint(vector<Pixel> points)
 
         
 
-        int rot = atan2(y, x)*180/M_PI - curAng;
+        int rot = atan2(x, y)*180/M_PI - curAng;
         int dist = sqrt(x*x+y*y);
 
         printf("now turning %i\n", rot);
-        VWTurn(rot, 100);
-        VWWait();
+        while(abs(rot-curAng) > 2){
+            VWTurn(2, 100);
+            VWWait();
+            VWGetPosition(&curX, &curY, &curAng);
+        }
+        
+        
         printf("now driving %i\n", dist);
-        VWStraight(dist, 100);
-        VWWait();
+
+        while (abs(curX-x) > 50 && abs(curY-y) > 50){
+            VWStraight(10, 100);
+            VWWait();
+            VWGetPosition(&curX, &curY, &curAng);
+        }
         VWGetPosition(&curX, &curY, &curAng);
+        
+        
     }
 
     
