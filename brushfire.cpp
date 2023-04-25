@@ -73,7 +73,7 @@ typedef struct Walls
 } Walls;
 
 // World Name
-const char *fileName = "u.pbm";
+const char *fileName = "fourblocks.pbm";
 vector<int> Colours;
 
 
@@ -263,7 +263,7 @@ void brushFire()
                 if (allPixels.at(i*128+j).id != -1 && (lastChanged != allPixels.at(i*128+j).lastChanged)){
                     
                     int newId = allPixels.at(i * 128 + j).id;
-                    printf("pixel: (%i, %i), id: %i\n", allPixels.at(i*128+j).x, allPixels.at(i*128+j).y, newId);
+                    
 
                     if (j > 0 && i > 0){
                        
@@ -406,10 +406,6 @@ void brushFire()
     }
 
 
-}
-int heuristic(Pixel pixel)
-{
-    return 0; // TODO A* heuristic (euclidean distance)
 }
 
 int main()
