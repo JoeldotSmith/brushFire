@@ -453,10 +453,15 @@ int main()
         switch (KEYRead())
         {
         case KEY1:
+            printf("\n\n            Grouping \n\n");
             groupPixel();
             break;
         case KEY2:
+            printf("\n\n            Burning \n\n");
             brushFire();
+            break;
+        case KEY3:
+            printf("\n\n            Driving \n\n");
             break;
         case KEY4:
             endSim = 1;
