@@ -361,18 +361,21 @@ void brushFire()
                     }
 
                 }
+
+                for (int x = 0; x < 128; x++){
+                    for (int y = 0; y < 128; y++){
+                        int id = allPixels.at(x*128+y).id;
+                        if (id != -1){
+                            LCDArea(y, x, y+1, x+1, Colours.at(id), 1);
+                        }
+                        
+                    }
+                }
+
             }
 
         }
-        for (int x = 0; x < 128; x++){
-            for (int y = 0; y < 128; y++){
-                int id = allPixels.at(x*128+y).id;
-                if (id != -1){
-                    LCDArea(y, x, y+1, x+1, Colours.at(id), 1);
-                }
-                
-            }
-        }
+        
     }
 
     
