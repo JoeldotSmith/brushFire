@@ -204,13 +204,13 @@ void driveToPoint(vector<Pixel> points)
         // VWTurn(rot, 100);
         // VWWait();
         printf("now driving %i\n", dist);
-        while (abs(curX-y) > 50 && abs(curY-x) > 50){
-            printf("curX-y = %i, curY-x = %i\n", abs(curX-y), abs(curY-x));
-            VWSetSpeed(50, 0);
-            VWGetPosition(&curX, &curY, &curAng);
-        }
-        // VWStraight(dist, 100);
-        // VWWait();
+        // while (abs(curX-y) > 50 && abs(curY-x) > 50){
+        //     printf("curX-y = %i, curY-x = %i\n", curX-y, curY-x);
+        //     VWSetSpeed(50, 0);
+        //     VWGetPosition(&curX, &curY, &curAng);
+        // }
+        VWStraight(dist, 100);
+        VWWait();
         VWGetPosition(&curX, &curY, &curAng);
         
     }
