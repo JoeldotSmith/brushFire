@@ -188,7 +188,7 @@ void driveToPoint(vector<Pixel> points)
 
         float x = convertPointsX(path.at(k).x)-curY;
         float y = convertPointsY(path.at(k).y)-curX;
-        printf("Moving: (%f, %f)\n", x, y);
+        printf("Moving: (%f, %f)\n", y, x);
 
         
 
@@ -201,9 +201,7 @@ void driveToPoint(vector<Pixel> points)
         printf("now driving %i\n", dist);
         VWStraight(dist, 100);
         VWWait();
-        curX = x +curX;
-        curY = y +curY;
-        curAng = rot +curAng;
+        VWGetPosition(&curX, &curY, &curAng);
         
     }
 
