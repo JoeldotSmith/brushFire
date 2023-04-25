@@ -117,11 +117,12 @@ void driveToPoint(vector<Pixel> points)
     int dist = 10000;
 
     for (int i = 0; i < points.size(); i++){
+
         int x = convertPointsX(points.at(i).x);
         int y = convertPointsY(points.at(i).y);
         int newDist = sqrt(x*x+y*y);
 
-        printf("Pixel: (%i, %i), distFromPlayer; %i\n", convertPointsX(pixel.x), convertPointsY(pixel.y), dist);
+        printf("Pixel: (%i, %i) => (%), distFromPlayer; %i\n", convertPointsX(pixel.x), convertPointsY(pixel.y), dist);
 
         if (newDist < dist){
             pixel = points.at(i);
