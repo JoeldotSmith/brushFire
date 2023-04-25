@@ -197,7 +197,7 @@ void driveToPoint(vector<Pixel> points)
 
         printf("now turning %i\n", rot);
         while (abs(rot-curAng) > 2){
-            VWSetSpeed(0, 1);
+            VWSetSpeed(0, 20 * ((rot-curAng)/abs(rot-curAng)));
             VWGetPosition(&curX, &curY, &curAng);
         }
         VWSetSpeed(0, 0);
@@ -205,7 +205,7 @@ void driveToPoint(vector<Pixel> points)
         // VWWait();
         printf("now driving %i\n", dist);
         while (abs(curX-y) > 10 && abs(curY-x) > 10){
-            VWSetSpeed(10, 0);
+            VWSetSpeed(50, 0);
             VWGetPosition(&curX, &curY, &curAng);
         }
         // VWStraight(dist, 100);
