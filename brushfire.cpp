@@ -3,7 +3,7 @@
 
 BRUSHFIRE for eyeSim
 
-Author Joel Smith
+Author Joel Smith + Sylvia Ackermann
 
 
 */
