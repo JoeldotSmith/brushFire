@@ -540,6 +540,7 @@ int main()
     Colours.push_back(BLACK);
     Colours.push_back(SILVER);
     Colours.push_back(ORANGE);
+    Colours.push_back(GREEN);
 
     SIMSetRobot(1, 500, 3500, 0, 1);
 
