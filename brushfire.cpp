@@ -296,7 +296,7 @@ void groupPixel()
         for (int j = 0; j < 128; j++) {
 
 
-            if (image[i * 128+j]){
+            if (image[i * 128+j && j < 127]){
                 
                 
 
