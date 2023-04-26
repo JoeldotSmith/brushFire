@@ -263,7 +263,7 @@ void groupPixel()
                 if (image[(i - 1) * 128 + j]){ // pixel above
                     hasNeighbours = allPixels.at((i - 1) * 128 + j).id;
                 }
-                if (j < 128 ){
+                if (j < 127 ){
                     if (image[(i - 1) * 128 + j + 1])
                     { // pixel to the top and right
                         hasNeighbours = allPixels.at((i - 1) * 128 + j + 1).id;
@@ -535,9 +535,11 @@ int main()
     Colours.push_back(GREEN);
     Colours.push_back(CYAN);
     Colours.push_back(MAGENTA);
-    Colours.push_back(MAGENTA);
+    Colours.push_back(PURPLE);
     Colours.push_back(DARKGRAY);
     Colours.push_back(BLACK);
+    Colours.push_back(SILVER);
+    Colours.push_back(ORANGE);
 
     SIMSetRobot(1, 500, 3500, 0, 1);
 
