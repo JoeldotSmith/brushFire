@@ -215,15 +215,6 @@ void driveToPoint(vector<Pixel> points)
         
     }
 
-    
-
-
-
-
-
-    
-    
-
     return;
 }
 
@@ -253,17 +244,22 @@ void groupPixel()
                     { // pixel to the left
                         hasNeighbours = allPixels.at(i * 128 + j - 1).id;
                     }
-                    if (image[(i - 1) * 128 + j - 1])
-                    { // pixel to the top and left
-                        hasNeighbours = allPixels.at((i - 1) * 128 + j - 1).id;
+                    if (i > 0){
+                        if (image[(i - 1) * 128 + j - 1])
+                            { // pixel to the top and left
+                                hasNeighbours = allPixels.at((i - 1) * 128 + j - 1).id;
+                            }
+                    }
+                    
+                }
+                
+                if ( i > 0){
+                    if (image[(i - 1) * 128 + j]){ // pixel above
+                        hasNeighbours = allPixels.at((i - 1) * 128 + j).id;
                     }
                 }
                 
-                
-                if (image[(i - 1) * 128 + j]){ // pixel above
-                    hasNeighbours = allPixels.at((i - 1) * 128 + j).id;
-                }
-                if (j < 127 ){
+                if (j < 127 && i > 0 ){
                     if (image[(i - 1) * 128 + j + 1])
                     { // pixel to the top and right
                         hasNeighbours = allPixels.at((i - 1) * 128 + j + 1).id;
