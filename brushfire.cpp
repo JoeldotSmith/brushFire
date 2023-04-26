@@ -286,6 +286,10 @@ void groupPixel()
             allPixels.push_back(newPixel);
         }
     }
+    for (int size = 0; size < allObject.size(); size++)
+    {
+        printf("Object %i, size = %lu, id = %i\n", size, allObject.at(size).allPixels.size(), allObject.at(size).id);
+    }
     
 
     for (int i = 0; i < 128; i++){
